@@ -6,29 +6,20 @@ import css from './Modal.module.css';
 const modalRoot = document.querySelector('#modal-root');
 
 const Modal = ({ url, alt, onClose }) => {
-  //console.log(url);
-  // useEffect(() => {
-  //   window.addEventListener('keydown', handleKeyEsc);
-  // }, []);
-  
-  // useEffect(() => {
-  //   window.removeEventListener('keydown', handleKeyEsc);
-  // }, []);
+  const handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      onClose();
+    }
+  };
 
   useEffect(() => {
-    const handleKeyDown = e => { console.log(e.code);
-      if (e.code === 'Escape') {
-        onClose();
-      }
-    };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
-  const handleClickBackdrop = e => { console.log(e.code);
+  const handleClickBackdrop = e => {
     if (e.target === e.currentTarget) {
       onClose();
     }
